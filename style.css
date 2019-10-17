@@ -31,7 +31,6 @@
     background-color: white;
 }
 
-
 .front{
     display: none;
     vertical-align: middle;
@@ -40,9 +39,6 @@
 .back{
     height: 100%; 
     flex: 1;
-}
-
-.start{
 }
 
 .timeDis{
@@ -62,4 +58,11 @@ button{
     height: 20vh;
     width: 20vh;
     border-radius: 50%;
+}
+
+body {
+    -webkit-user-select: none;
+       -moz-user-select: -moz-none;
+        -ms-user-select: none;
+            user-select: none;
 }
