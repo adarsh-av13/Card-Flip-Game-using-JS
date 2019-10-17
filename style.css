@@ -1,0 +1,65 @@
+:root {
+    font-size: 10vh;
+}
+
+.container {
+    width: 100%;
+    height: 97vh;
+    /* background: white; */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+
+
+.row {
+    justify-content: space-evenly;
+    height: 35vh;
+    display: flex;
+}
+
+.toprow{
+    display: flex;
+    justify-content: space-between;
+}
+
+.cards{
+    flex: 0.09;
+    border-radius: 2vh;
+    transition: all .7s ease;
+    background-color: white;
+}
+
+
+.front{
+    display: none;
+    vertical-align: middle;
+}
+
+.back{
+    height: 100%; 
+    flex: 1;
+}
+
+.start{
+}
+
+.timeDis{
+  position: relative;
+  height: 20vh;  
+  right: 0;
+}
+
+img{
+    width: 100%;
+    border-radius: 2vh;
+}
+
+button{
+    position: relative;
+    left: 6vh;
+    height: 20vh;
+    width: 20vh;
+    border-radius: 50%;
+}
