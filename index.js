@@ -111,6 +111,7 @@ function reduceTime(){
     if(gameOver == true){
       clearInterval(myTimer);
       let audio = document.querySelector('.winner');
+      isStartButtonClicked = false;
       audio.play(); 
       for(let i=0;i<8;++i){
         let front = cards[i].querySelector('.front');
@@ -143,12 +144,26 @@ function reduceTime(){
     timeDis.innerHTML = '0'+curTime.getMinutes()+':'+x+curTime.getSeconds();  
 }
 
-
+function cardAssign(){
+  for(let i=15;i>0;i--){
+    const j = Math.floor(Math.random()*i);
+    const temp = crd[i];
+    crd[i] = crd[j];
+    crd[j] = temp;
+  }
+  cards.forEach(card => {
+    let front = card.querySelector('.front');
+    let back = card.querySelector('.back');
+    back.src = `Images/cardback.jpg`;
+    front.src = `Images/${cpics[crd[cards.indexOf(card)]]}`;
+});
+}
 let x;
 function startGame(){
     if(isStartButtonClicked===true)
       return;
     isStartButtonClicked = true;
+    cardAssign();
     gameOver = false;
     curTime.setMinutes(1);
     curTime.setSeconds(5);
@@ -156,9 +171,8 @@ function startGame(){
     cards.forEach(card => card.addEventListener('dblclick',flip)); 
     myTimer = setInterval(reduceTime,1000);         
 }
-cards.forEach(card => {
-    let front = card.querySelector('.front');
-    front.src = `Images/${cpics[crd[cards.indexOf(card)]]}`;
-});
+
+
+
 
 startButton.addEventListener('click',startGame);
