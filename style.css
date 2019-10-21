@@ -26,7 +26,7 @@
 .toprow{
     top: 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     border-radius: 2vh;
 }
 
@@ -68,6 +68,11 @@ button{
     font-weight: bold;
     background-color: rgb(10, 0, 53);
     color: white;
+}
+
+.time{
+    border: .5vh solid white;
+    border-radius: 2vh;
 }
 
 body {

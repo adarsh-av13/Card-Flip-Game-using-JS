@@ -1,11 +1,11 @@
 const cards = Array.from(document.querySelectorAll('.cards'));
-const startButton = document.querySelector('button');
+const startButton = document.querySelector('.start');
+const resetButton = document.querySelector('.reset');
 const timeDis = document.querySelector('.time');
-let score = 0;
 const click = document.querySelector('.click');
 const wrong = document.querySelector('.wrong');
 const correct = document.querySelector('.correct');
-
+let score = 0;
 const cpics = [ 
     'crookshanks.png',
     'dolphin.png',
@@ -111,7 +111,7 @@ function reduceTime(){
     if(gameOver == true){
       clearInterval(myTimer);
       let audio = document.querySelector('.winner');
-      isStartButtonClicked = false;
+      // isStartButtonClicked = false;
       audio.play(); 
       for(let i=0;i<8;++i){
         let front = cards[i].querySelector('.front');
@@ -125,7 +125,10 @@ function reduceTime(){
     let mins = curTime.getMinutes();
     if(mins==0 && (secs-1) == -1){
         gameOver = true;
-        isStartButtonClicked = false;
+        clearInterval(myTimer);
+        const gameover = document.querySelector('.gameover');
+        gameover.play();
+        // isStartButtonClicked = false;
         cards.forEach(card => card.removeEventListener('dblclick',flip));
     }
     else if(secs-1 == -1){
@@ -151,28 +154,46 @@ function cardAssign(){
     crd[i] = crd[j];
     crd[j] = temp;
   }
+  isClicked = [
+    false,false,false,false,
+    false,false,false,false,
+    false,false,false,false,
+    false,false,false,false
+  ];
+  isDone = [
+    false,false,false,false,
+    false,false,false,false,
+    false,false,false,false,
+    false,false,false,false
+];
   cards.forEach(card => {
+    card.addEventListener('dblclick',flip)
     let front = card.querySelector('.front');
     let back = card.querySelector('.back');
     back.src = `Images/cardback.jpg`;
     front.src = `Images/${cpics[crd[cards.indexOf(card)]]}`;
-});
+    front.style.display = 'none';
+    back.style.display = 'block';
+  });
+
+  curTime.setMinutes(1);
+  curTime.setSeconds(5);
+  timeDis.innerHTML = '0'+curTime.getMinutes()+':'+'0'+curTime.getSeconds();
+  myTimer = setInterval(reduceTime,1000);         
 }
 let x;
-function startGame(){
+function startGame() {
     if(isStartButtonClicked===true)
       return;
     isStartButtonClicked = true;
     cardAssign();
     gameOver = false;
-    curTime.setMinutes(1);
-    curTime.setSeconds(5);
-    timeDis.innerHTML = '0'+curTime.getMinutes()+':'+'0'+curTime.getSeconds();
-    cards.forEach(card => card.addEventListener('dblclick',flip)); 
-    myTimer = setInterval(reduceTime,1000);         
 }
 
-
-
+function resetGame() {
+  clearInterval(myTimer);
+  cardAssign();
+}
 
 startButton.addEventListener('click',startGame);
+resetButton.addEventListener('click',resetGame);
